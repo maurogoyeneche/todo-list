@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
+//hey mario,lights off
+//hey mario search best anime fights on youtube
+interface Task {
+	id: number;
+	title: string;
+	isDone?: boolean;
+	isDoing?: boolean;
+}
 
 const InsertTask = () => {
-	const [task, setTasks] = useState<Array<string>>([]);
+	const [task, setTask] = useState<Task[]>([]);
+	console.log(task);
 	const [value, setValue] = useState<string>('');
 
 	const handleSubmit = (ev: any) => {
 		ev.preventDefault();
-		if (value) setTasks([...task, value]);
+		if (value) {
+			setTask([...task, { id: 123, title: value }]);
+		}
 		setValue('');
 	};
 

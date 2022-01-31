@@ -10,13 +10,14 @@ interface Task {
 
 const InsertTask = () => {
 	const [task, setTask] = useState<Task[]>([]);
-	console.log(task);
+
 	const [value, setValue] = useState<string>('');
 
 	const handleSubmit = (ev: any) => {
 		ev.preventDefault();
 		if (value) {
 			setTask([...task, { id: 123, title: value }]);
+			console.log(task);
 		}
 		setValue('');
 	};
@@ -53,7 +54,7 @@ const InsertTask = () => {
 							key={Math.random()}
 							className=' d-flex justify-content-between list-group-item p-0 border-0'
 						>
-							{task}
+							{task.title}
 							<button
 								type='button'
 								className='btn btn-sm btn-outline-success mx-1'

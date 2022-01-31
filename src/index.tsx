@@ -5,23 +5,20 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 
-import {reducer} from './redux/reducers/reducer'
-import { createStore,  } from 'redux';
-import { devToolsEnhancer  } from 'redux-devtools-extension';
+import { reducer } from './redux/reducers/reducer';
+import { createStore, combineReducers } from 'redux';
+import { devToolsEnhancer } from 'redux-devtools-extension';
 
-const store = createStore(
-  reducer,
-  devToolsEnhancer({})
-);
+// hay que usar un combine reducer al re pedo para que typescript corra
+const store = createStore(combineReducers({ reducer }), devToolsEnhancer({}));
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-
-    <App />
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+	<React.StrictMode>
+		<Provider store={store}>
+			<App />
+		</Provider>
+	</React.StrictMode>,
+	document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

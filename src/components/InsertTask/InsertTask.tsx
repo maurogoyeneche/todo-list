@@ -1,21 +1,23 @@
 import ShowTask from 'components/ShowTask/ShowTask';
 import React, { useState } from 'react';
-
-interface Task {
-	id: number;
-	title: string;
-	isDone?: boolean;
-	isDoing?: boolean;
-}
+import { useDispatch, useSelector } from 'react-redux';
+import { IAppState } from '../../redux/reducers/reducer';
 
 const InsertTask = () => {
-	const [task, setTask] = useState<Task[]>([]);
+	const task = useSelector<IAppState>(state => state.tasks);
+	console.log(task);
+	const dispatch = useDispatch();
+	// const [task, setTask] = useState<Task[]>([]);
 	const [value, setValue] = useState<string>('');
 
 	const handleSubmit = (ev: any) => {
 		ev.preventDefault();
 		if (value) {
-			setTask([...task, { id: Math.random(), title: value }]);
+			// setTask([...task, { id: Math.random(), title: value }]);
+			dispatch({
+				type: 'ADD_TASK',
+				payload: { id: Math.random(), title: value },
+			});
 			console.log(task);
 		}
 		setValue('');

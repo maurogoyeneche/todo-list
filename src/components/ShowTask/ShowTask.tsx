@@ -2,8 +2,8 @@ import React from 'react';
 
 type task = {
 	task: {
-		id: number;
-		title: string;
+		id: number | undefined;
+		title: string | undefined;
 		isDone?: boolean;
 		isDoing?: boolean;
 	}[];

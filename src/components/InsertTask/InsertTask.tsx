@@ -1,27 +1,23 @@
+import ShowTask from 'components/ShowTask/ShowTask';
 import React, { useState } from 'react';
-//hey mario,lights off
-//hey mario search best anime fights on youtube
-interface Task {
-	id: number;
-	title: string;
-	isDone?: boolean;
-	isDoing?: boolean;
-}
+import { useDispatch, useSelector } from 'react-redux';
+import { IAppState } from '../../redux/reducers/taskReducer';
+import { addtask } from '../../redux/actions/task';
 
 const InsertTask = () => {
-	const [task, setTask] = useState<Task[]>([]);
-
+	const task = useSelector<IAppState>(state => state.tasks);
+	console.log(task);
+	const dispatch = useDispatch();
+	// const [task, setTask] = useState<Task[]>([]);
 	const [value, setValue] = useState<string>('');
 
 	const handleSubmit = (ev: any) => {
 		ev.preventDefault();
 		if (value) {
-			setTask([...task, { id: 123, title: value }]);
-			console.log(task);
+			dispatch(addtask(value, Math.random()));
+			setValue('');
 		}
-		setValue('');
 	};
-
 	return (
 		<div className=''>
 			<form action='' onSubmit={handleSubmit}>
@@ -47,23 +43,7 @@ const InsertTask = () => {
 					You will add this new task: <strong>{value}</strong>
 				</p>
 			</form>
-			<ul className='list-group'>
-				{task &&
-					task.map(task => (
-						<li
-							key={Math.random()}
-							className=' d-flex justify-content-between list-group-item p-0 border-0'
-						>
-							{task.title}
-							<button
-								type='button'
-								className='btn btn-sm btn-outline-success mx-1'
-							>
-								Move
-							</button>
-						</li>
-					))}
-			</ul>
+			<ShowTask />
 		</div>
 	);
 };

@@ -1,7 +1,8 @@
 import ShowTask from 'components/ShowTask/ShowTask';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { IAppState } from '../../redux/reducers/reducer';
+import { IAppState } from '../../redux/reducers/taskReducer';
+import { addtask } from '../../redux/actions/task';
 
 const InsertTask = () => {
 	const task = useSelector<IAppState>(state => state.tasks);
@@ -13,17 +14,10 @@ const InsertTask = () => {
 	const handleSubmit = (ev: any) => {
 		ev.preventDefault();
 		if (value) {
-			// setTask([...task, { id: Math.random(), title: value }]);
-			dispatch({
-				type: 'ADD_TASK',
-				payload: { id: Math.random(), title: value },
-			});
-			console.log(task);
+			dispatch(addtask(value, Math.random()));
+			setValue('');
 		}
-		setValue('');
-		console.log(task);
 	};
-
 	return (
 		<div className=''>
 			<form action='' onSubmit={handleSubmit}>
@@ -49,7 +43,7 @@ const InsertTask = () => {
 					You will add this new task: <strong>{value}</strong>
 				</p>
 			</form>
-			<ShowTask task={task} />
+			<ShowTask />
 		</div>
 	);
 };

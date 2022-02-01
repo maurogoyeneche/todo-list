@@ -5,19 +5,25 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 
-import { reducer } from './redux/reducers/reducer';
+import { taskReducer } from './redux/reducers/taskReducer';
 import { createStore, combineReducers } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension';
+import { configureStore } from '@reduxjs/toolkit';
 
 // hay que usar un combine reducer al re pedo para que typescript corra
-const store = createStore(combineReducers({ reducer }), devToolsEnhancer({}));
+const store = configureStore({
+	reducer: combineReducers({
+		taskReducer: taskReducer,
+		pepeReducer: taskReducer,
+	}),
+});
 
 ReactDOM.render(
-	<React.StrictMode>
-		<Provider store={store}>
+	<Provider store={store}>
+		<React.StrictMode>
 			<App />
-		</Provider>
-	</React.StrictMode>,
+		</React.StrictMode>
+	</Provider>,
 	document.getElementById('root')
 );
 

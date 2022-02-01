@@ -14,12 +14,12 @@ const InsertTask = () => {
 	const handleSubmit = (ev: any) => {
 		ev.preventDefault();
 		if (value) {
-			dispatch(addtask(value, Math.random()));
+			dispatch(addtask(value, Math.ceil(Math.random() * 100)));
 			setValue('');
 		}
 	};
 	return (
-		<div className=''>
+		<>
 			<form action='' onSubmit={handleSubmit}>
 				<div className='d-flex  align-items-baseline w-100'>
 					<label htmlFor='task' className='w-100'>
@@ -44,7 +44,7 @@ const InsertTask = () => {
 				</p>
 			</form>
 			<ShowTask />
-		</div>
+		</>
 	);
 };
 

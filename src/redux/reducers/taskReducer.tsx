@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { addtask } from '../actions/task';
+import { addTask } from '../actions/task';
 import Task from '../../models/Task';
 
 export interface IAppState {
@@ -10,7 +10,7 @@ const initialState: IAppState = {
 };
 
 export const taskReducer = createReducer(initialState, {
-	[addtask.type]: (state: IAppState, action: any) => ({
+	[addTask.type]: (state: IAppState, action: any) => ({
 		...state,
 		tasks: [...state.tasks, action.payload],
 	}),

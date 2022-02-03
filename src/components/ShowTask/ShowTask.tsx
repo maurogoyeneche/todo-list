@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Task from '../../models/Task';
+import { addTask } from '../../redux/actions/task';
 
 const ShowTask = () => {
 	const task: Task[] | any = useSelector<any>(state => state.taskReducer.tasks);
 	const dispatch = useDispatch();
 
-	// const handleClick = () => {
-	// 	// dispatch();
-	// };
+	const handleClickToDoing = (task: Task[] | any) => {
+		let { id, title, isDoing } = task;
+		dispatch(addTask(title, id, (isDoing = true)));
+		console.log(`moving on to doing? ${id} ${isDoing}`);
+	};
 
 	return (
 		<ul className='list-group'>
@@ -28,7 +31,7 @@ const ShowTask = () => {
 							</div>
 							<div
 								className='btn btn-sm btn-outline-success border-0'
-								onClick={() => console.log(`click in ${task.id}`)}
+								onClick={() => handleClickToDoing(task)}
 							>
 								<i className='fas fa-arrow-circle-right' />
 							</div>

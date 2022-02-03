@@ -1,20 +1,16 @@
-import ShowTask from 'components/ShowTask/ShowTask';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { IAppState } from '../../redux/reducers/taskReducer';
-import { addtask } from '../../redux/actions/task';
+
+import { addTask } from '../../redux/actions/task';
 
 const InsertTask = () => {
-	const task = useSelector<IAppState>(state => state.tasks);
-	console.log(task);
 	const dispatch = useDispatch();
-	// const [task, setTask] = useState<Task[]>([]);
 	const [value, setValue] = useState<string>('');
 
 	const handleSubmit = (ev: any) => {
 		ev.preventDefault();
 		if (value) {
-			dispatch(addtask(value, Math.ceil(Math.random() * 100)));
+			dispatch(addTask(value, Math.ceil(Math.random() * 100)));
 			setValue('');
 		}
 	};
@@ -43,7 +39,6 @@ const InsertTask = () => {
 					You will add this new task: <strong>{value}</strong>
 				</p>
 			</form>
-			<ShowTask />
 		</>
 	);
 };
